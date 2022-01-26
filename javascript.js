@@ -1,32 +1,56 @@
+let computerScore = 0;
+let userScore = 0;
+
 function computerPlay(){
     let result = Math.floor(Math.random()*3) +1;
-    console.log(result);
     let computerChoice;
     switch(result){
         case 1:
-            computerChoice = "Piedra";
+            computerChoice = "piedra";
             break;
         case 2:
-            computerChoice = "Tijera";
+            computerChoice = "tijera";
             break;
         case 3:
-            computerChoice = "Papel";
+            computerChoice = "papel";
             break;
     }
-    console.log(computerChoice);
     return computerChoice;
 }
-computerPlay();
 function playerSelection(){
     let playerChoice = prompt("Choose rock paper or scisors");
     playerChoice = playerChoice.toLowerCase();
-    console.log(playerChoice);
     return playerChoice;
 }
-playerSelection();
-
 function playRound(playerSelection, computerChoice){
-    if(playerSelection == "tijeras" && computerChoice == "piedra"){
-        console.log("Perdiste piedra le gana a tijeras");
+    console.log("Jugador escojio: " + playerSelection + " Computadora escojio: " + computerChoice);
+    if(playerSelection == "tijera" && computerChoice == "piedra"){
+        computerScore++;
+    }else if(playerSelection == "piedra" && computerChoice == "tijera"){
+        userScore++;
+    }else if(playerSelection == "papel" && computerChoice == "piedra"){
+        userScore++;
+    }else if(playerSelection == "piedra" && computerChoice == "papel"){
+        computerScore++;
+    }else if(playerSelection == "tijera" && computerChoice == "papel"){
+        userScore++;
+    }else if(playerSelection == "papel" && computerChoice == "tijera"){
+        computerScore++;
+    }
+    
+}
+function play(){
+    playRound(playerSelection(),computerPlay());
+    playRound(playerSelection(),computerPlay());
+    playRound(playerSelection(),computerPlay());
+    playRound(playerSelection(),computerPlay());
+    playRound(playerSelection(),computerPlay());
+    if(computerScore>userScore){
+        alert("COMPUTER WINS")
+    }else if(computerScore == userScore){
+        alert("EMPATE")
+    }else{
+        alert("USER WINS");
     }
 }
+play();
